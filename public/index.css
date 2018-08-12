@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'NetflixFont';
+  src: local('NetflixFont'), url(assets/fonts/AmaticSC-Bold.ttf) format('truetype');
+}
+
+body {
+  font-family: "NetflixFont";
+  font-size: 20px;
+}
