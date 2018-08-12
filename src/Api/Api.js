@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-  baseURL: 'https://demo5891478.mockable.io/genres/'
+  baseURL: 'http://34.211.130.47:3000/genres/'
 });
