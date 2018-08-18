@@ -15,7 +15,7 @@ const Result = (props) => {
   return (
     <li className='result'>
       <button
-        children={props.item}
+        children={props.item + ' (' + props.titles_count + ')'}
         key={props.item.itemId}
         data-id={props.item.itemId}
         onClick={() => redirectToNetflix(props.uri)}
@@ -41,7 +41,12 @@ class FilteredList extends React.Component {
       <ul className='results'>
         {
           this.state.items.map(function(item) {
-            return <Result item={item.name} itemId={item.id} uri={item.uri} key={item.id} />
+            return <Result
+              item={item.name}
+              itemId={item.id}
+              uri={item.uri}
+              titles_count={item.netflix_titles_count}
+              key={item.id} />
           })
         }
       </ul>;
@@ -84,7 +89,7 @@ class FilteredList extends React.Component {
     }
 
     // Query the API and set results unless the word has changed
-    const query = '?w=' + word + '&limit=10';
+    const query = '?w=' + word + '&limit=' + this.props.length + '&titles_q=true';
     const response = await API.get(query);
     if (this.state.currentQuery !== word) {
       return;
