@@ -7,7 +7,6 @@ import './FilteredList.css'
 
 const Result = (props) => {
   const redirectToNetflix = (uri) => {
-    console.log(uri);
     chrome.tabs.query({currentWindow: true, active: true}, (tab) => {
       chrome.tabs.update(tab.id, {url: uri});
     });
@@ -52,6 +51,8 @@ class FilteredList extends React.Component {
       </ul>;
     } else if (this.state.loading) {
       results = <div className='loader-container'><div className='lds-ripple'><div></div><div></div></div></div>
+    } else if (this.state.currentQuery !== '') {
+      results = <div className='empty-list circle'>No encontramos nada:c</div>;
     } else {
       results = <div className='empty-list circle'>Realiza una busqueda!</div>;
     }
@@ -72,11 +73,6 @@ class FilteredList extends React.Component {
 
   async filterList(event) {
     const word = event.target.value;
-    this.setState({
-      currentQuery: word,
-      items: this.state.items,
-      loading: true
-    })
 
     // Empty word => Message instead of results
     if (word === '') {
@@ -86,6 +82,12 @@ class FilteredList extends React.Component {
         loading: false
       })
       return;
+    } else {
+      this.setState({
+        currentQuery: word,
+        items: this.state.items,
+        loading: true
+      })
     }
 
     // Query the API and set results unless the word has changed
@@ -94,7 +96,7 @@ class FilteredList extends React.Component {
     if (this.state.currentQuery !== word) {
       return;
     }
-    console.log(response.data);
+
     this.setState({
       items: response.data.slice(0, this.props.length),
       currentQuery: word,
