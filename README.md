@@ -1,7 +1,5 @@
 # Netflix Hidden Categories Chrome Extension
 
-## Demonstration
+## Usage
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY4MzE2NjYzNV19
--->
+![alt Didn't Work :c](public/assets/images/image1.gif)
