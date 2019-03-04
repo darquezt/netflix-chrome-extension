@@ -91,7 +91,7 @@ class FilteredList extends React.Component {
     }
 
     // Query the API and set results unless the word has changed
-    const query = '?w=' + word + '&limit=' + this.props.length + '&titles_q=true';
+    const query = '?w=' + word + '&limit=' + this.props.length + '&titles_q=true&active_genres=true&sort_by=nTitles';
     const response = await API.get(query);
     if (this.state.currentQuery !== word) {
       return;
